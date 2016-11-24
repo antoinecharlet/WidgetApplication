@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Fête du jour</string>
+    <string name="appwidget_text">Saint Léo</string>
+    <string name="add_widget">Ajouter widget</string>
+    <string name="aucun_resultat">Erreur : aucun résultat</string>
+</resources>
