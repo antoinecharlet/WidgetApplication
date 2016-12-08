@@ -5,6 +5,12 @@ import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -44,12 +50,41 @@ public class AppWidget extends AppWidgetProvider {
         // Get the layout for the App Widget and attach an on-click listener
         // to the button
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.app_widget);
+
+        /*set on click*/
         views.setOnClickPendingIntent(R.id.appwidget, pendingIntent);
+        views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent);
+
+        setViewStyle(context, views);
 
         views.setTextViewText(R.id.appwidget_text, widgetText);
-
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+        Log.d("update", "widgetUpdate");
+    }
+
+    private static void setViewStyle(Context context, RemoteViews views) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
+
+        int color = prefs.getInt("widget_color", Color.BLUE);
+        Log.d("color", String.valueOf(color));
+        int[] colors = {color, color};
+        GradientDrawable gradientDrawable = new GradientDrawable(
+                GradientDrawable.Orientation.LEFT_RIGHT, colors);
+
+        float dpi = context.getResources().getDisplayMetrics().xdpi;
+        float dp = context.getResources().getDisplayMetrics().density;
+
+        Bitmap bitmap = Bitmap.createBitmap(Math.round(288 * dp), Math.round(72 * dp), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        gradientDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        //corner
+        gradientDrawable.setCornerRadius(5 * (dpi / 160));
+        gradientDrawable.mutate();
+        //contour blanc
+        gradientDrawable.setStroke(Math.round(2 * dp), Color.WHITE);
+        gradientDrawable.draw(canvas);
+        views.setImageViewBitmap(R.id.bck_image, bitmap);
     }
 
 
@@ -125,7 +160,7 @@ public class AppWidget extends AppWidgetProvider {
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
-        Log.d("bouton", intent.getAction().toString());
+        Log.d("bouton", intent.getAction());
     }
 
     @Override
