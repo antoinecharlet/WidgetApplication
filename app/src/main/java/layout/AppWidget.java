@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -66,7 +65,7 @@ public class AppWidget extends AppWidgetProvider {
     private static void setViewStyle(Context context, RemoteViews views) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        int color = prefs.getInt("widget_color", Color.BLUE);
+        int color = prefs.getInt("widget_color", R.color.colorPrimary);
         Log.d("color", String.valueOf(color));
         int[] colors = {color, color};
         GradientDrawable gradientDrawable = new GradientDrawable(
@@ -82,7 +81,10 @@ public class AppWidget extends AppWidgetProvider {
         gradientDrawable.setCornerRadius(5 * (dpi / 160));
         gradientDrawable.mutate();
         //contour blanc
-        gradientDrawable.setStroke(Math.round(2 * dp), Color.WHITE);
+        //gradientDrawable.setStroke(Math.round(2 * dp), Color.WHITE);
+        //setAlpha (transparence)
+        gradientDrawable.setAlpha(210);
+
         gradientDrawable.draw(canvas);
         views.setImageViewBitmap(R.id.bck_image, bitmap);
     }
