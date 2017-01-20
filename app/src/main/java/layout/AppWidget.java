@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.GradientDrawable;
 import android.preference.PreferenceManager;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -65,7 +66,7 @@ public class AppWidget extends AppWidgetProvider {
     private static void setViewStyle(Context context, RemoteViews views) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
 
-        int color = prefs.getInt("widget_color", R.color.colorPrimary);
+        int color = prefs.getInt("widget_color", ContextCompat.getColor(context, R.color.colorPrimary));
         Log.d("color", String.valueOf(color));
         int[] colors = {color, color};
         GradientDrawable gradientDrawable = new GradientDrawable(

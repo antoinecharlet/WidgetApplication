@@ -6,13 +6,18 @@
         android:key="example_switch"
         android:summary="@string/pref_description_social_recommendations"
         android:title="@string/pref_title_social_recommendations" />-->
+    <PreferenceCategory
+        android:title="@string/category_widget"
+        android:key="pref_key_storage_settings">
 
     <com.rarepebble.colorpicker.ColorPreference
-        android:defaultValue="#7ac6ee"
         android:key="widget_color"
         android:title="@string/param_color"
         app:colorpicker_showHex="false"
-        app:colorpicker_showAlpha="false" />
+        app:colorpicker_showAlpha="false"
+        android:defaultValue="#7ac6ee" />
+
+    </PreferenceCategory>
 
     <!-- NOTE: EditTextPreference accepts EditText attributes. -->
     <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->

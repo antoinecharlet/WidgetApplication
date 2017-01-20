@@ -79,4 +79,5 @@
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="param_color">Couleur du widget</string>
     <string name="image_bck">imageBck</string>
+    <string name="category_widget">Widget</string>
 </resources>
