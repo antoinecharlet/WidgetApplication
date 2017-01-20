@@ -83,7 +83,7 @@ public class AppWidget extends AppWidgetProvider {
         //contour blanc
         //gradientDrawable.setStroke(Math.round(2 * dp), Color.WHITE);
         //setAlpha (transparence)
-        gradientDrawable.setAlpha(210);
+        gradientDrawable.setAlpha(225);
 
         gradientDrawable.draw(canvas);
         views.setImageViewBitmap(R.id.bck_image, bitmap);
