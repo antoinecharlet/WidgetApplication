@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
+import com.example.antoine.settings.SettingsActivity;
 import com.example.antoine.widgetapplication.MainActivity;
 import com.example.antoine.widgetapplication.R;
 
@@ -44,7 +45,7 @@ public class AppWidget extends AppWidgetProvider {
         }
 
         // Create an Intent to launch ExampleActivity
-        Intent intent = new Intent(context, MainActivity.class);
+        Intent intent = new Intent(context, SettingsActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 
         // Get the layout for the App Widget and attach an on-click listener
@@ -92,7 +93,7 @@ public class AppWidget extends AppWidgetProvider {
 
 
     //recupere le saint du jour depuis le fichier JSON parsé
-    private static String getFeteOfDay(Context context) throws JSONException {
+    public static String getFeteOfDay(Context context) throws JSONException {
         JSONObject obj = new JSONObject(loadJSONFromAsset(context));
         JSONArray array = obj.getJSONArray(getMonth());
         array = array.getJSONArray(getDay());
